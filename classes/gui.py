@@ -2,17 +2,25 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button, Slider
-from classes.environment import VacuumEnvironment
 import numpy as np
 
 
 
 class CleaningGUI:
-    def __init__(self,Env):
+    def __init__(self,Env,Agent):
         self.Env= Env
+        self.Agent=Agent
+        
+        #init figures
         self.Env.fig , self.Env.ax=plt.subplots()
         plt.ion()
         self.render()
+
+    def step(self, action=None):
+        """Perform one agent step and update GUI"""
+        self.Agent.act()
+        self.render()
+     
 
     def render(self):
 
@@ -48,10 +56,4 @@ class CleaningGUI:
         Env.fig.canvas.flush_events()
 
 
-    def step(self,action=None):
-        
-        if action:
-            self.Env.move_agent(action)
-        if self.Env.is_dirty():
-            self.Env.clean()
-        self.render()
+    
