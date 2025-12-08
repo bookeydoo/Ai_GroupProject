@@ -19,7 +19,7 @@ def main():
 
     for action in actions:
         gui.step(action)
-        time.sleep(0.5)  # control speed
+        time.sleep(0.3)  # control speed
 
     print("\n=== FINAL REPORT ===")
     print("Score:", env.score)
