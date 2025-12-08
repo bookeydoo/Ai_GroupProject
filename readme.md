@@ -1,0 +1,1 @@
+This repo is for 12th project for our ai project term 7 2025/2026
