@@ -1,26 +1,21 @@
-from classes import environment
+from classes.environment import VacuumEnvironment
 from classes.gui import CleaningGUI 
-import numpy
+import matplotlib.pyplot as plt
+import time
 
 def main():
-    # Define your grid size, initial agent position, and dirt locations
-    grid_size = (5, 5)
-    agent_start = (0, 0)
-    dirt_positions = [(1, 1), (3, 2), (4, 4)]
+    env = VacuumEnvironment(size=5, dirt_count=5)
+    gui = CleaningGUI(env)
 
-    # Create the GUI object
-    gui = CleaningGUI(grid_size=grid_size, dirt_positions=dirt_positions, agent_pos=agent_start)
+    plt.show()
+    plt.ioff()
+    # Example sequence of actions
+    actions = ["RIGHT", "RIGHT", "DOWN", "DOWN", "LEFT", "DOWN", "RIGHT", "RIGHT"]
+    for action in actions:
+        gui.step(action)
+        time.sleep(1)  # control speed
 
-    # Define the agent's planned steps (row, col)
-    agent_steps = [
-        (0,0), (0,1), (1,1), (2,1),
-        (3,2), (4,2), (4,3), (4,4)
-    ]
-    gui.set_steps(agent_steps)
-
-    # Start the GUI
-    import matplotlib.pyplot as plt
-    plt.show()  # This will display the GUI window
+    print(f"Final score: {env.score}, steps: {env.steps}")
 
 if __name__ == "__main__":
     main()
