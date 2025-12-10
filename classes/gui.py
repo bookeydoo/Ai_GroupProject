@@ -1,24 +1,74 @@
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from matplotlib.animation import FuncAnimation
+#import matplotlib.patches as patches
+#from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button, Slider
 import numpy as np
-
+import time
 
 
 class CleaningGUI:
     def __init__(self,Env,Agent):
         self.Env= Env
         self.Agent=Agent
-        
+        self.running=False    #state of the simulation
+
+        plt.rcParams['toolbar'] = 'none' #disable toolbar
+
         #init figures
         self.Env.fig , self.Env.ax=plt.subplots()
+        plt.subplots_adjust(bottom=0.2)
         plt.ion()
         self.render()
 
-    def step(self, action=None):
-        """Perform one agent step and update GUI"""
-        self.Agent.act()
+        #ADD BUTTONS
+        self.start_ax = plt.axes([0.1, 0.05, 0.25, 0.1])
+        self.reset_ax = plt.axes([0.6, 0.05, 0.25, 0.1])
+
+        self.start_button = Button(self.start_ax, "Start")
+        self.reset_button = Button(self.reset_ax, "Reset")
+
+        self.start_button.on_clicked(self.start_simulation)
+        self.reset_button.on_clicked(self.reset_simulation)
+    
+        # SPEED SLIDER
+        self.speed_ax = plt.axes([0.1, 0.01, 0.8, 0.03])  
+        self.speed_slider = Slider(
+        self.speed_ax,
+        "Speed",
+        valmin=0.05,    # fastest
+        valmax=1.0,     # slowest
+        valinit=0.3,    # default
+        valstep=0.01
+        )
+        
+        self.speed = 0.3
+        self.speed_slider.on_changed(self.update_speed)
+
+    
+    def update_speed(self, val): 
+            self.speed = val
+
+
+    def start_simulation(self, event):
+        """When the user presses Start."""
+        self.running = True
+
+    def reset_simulation(self, event):
+        """Reset world, agent, score, dirt, steps."""
+        self.running = False
+        self.Env.__init__(self.Env.size, dirt_count=5)   # reinitialize env
+        self.Agent.actions_log = []
+        self.render()
+
+    def step(self):
+        """Execute 1 step only if running=True"""
+        if self.running:
+            self.Agent.act()
+            # If there is no dirt left in the environment, stop the simulation
+            if not np.any(self.Env.grid == 1):
+                self.running = False
+            
+            time.sleep(self.speed) #control speed
         self.render()
      
 

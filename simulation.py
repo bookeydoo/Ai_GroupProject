@@ -17,9 +17,9 @@ def main():
         x=random.choice(["UP","DOWN","LEFT","RIGHT"])
         actions.append(x)
 
-    for action in actions:
-        gui.step(action)
-        time.sleep(0.3)  # control speed
+    while True:
+        gui.step()
+        time.sleep(0.001)  # control speed
 
     print("\n=== FINAL REPORT ===")
     print("Score:", env.score)
