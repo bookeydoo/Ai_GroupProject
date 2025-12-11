@@ -13,6 +13,7 @@ class CleaningGUI:
         self.running=False    
         self.Title=title
         plt.rcParams['toolbar'] = 'none' 
+        
 
         #init figures
         self.Env.fig , self.Env.ax=plt.subplots()
@@ -24,17 +25,17 @@ class CleaningGUI:
         self.start_ax = plt.axes([0.1, 0.05, 0.25, 0.1])
         self.reset_ax = plt.axes([0.6, 0.05, 0.25, 0.1])
 
-        self.start_button = Button(self.start_ax, "Start")
+        self.start_button = Button(self.start_ax, "Stop")
         self.reset_button = Button(self.reset_ax, "Reset")
 
-        self.start_button.on_clicked(self.start_simulation)
+        self.start_button.on_clicked(self.shutdown)
         self.reset_button.on_clicked(self.reset_simulation)
     
         # SPEED SLIDER
         self.speed_ax = plt.axes([0.1, 0.01, 0.8, 0.03])  
         self.speed_slider = Slider(
         self.speed_ax,
-        "Speed",
+        "Time",
         valmin=0.05,    # fastest
         valmax=1.0,     # slowest
         valinit=0.2,    # default
@@ -49,13 +50,13 @@ class CleaningGUI:
             self.speed = val
 
 
-    def start_simulation(self, event):
+    def shutdown(self, event):
         """When the user presses Start."""
-        self.running = True
+        self.running = False 
 
     def reset_simulation(self, event):
         """Reset world, agent, score, dirt, steps."""
-        self.running = False
+        self.running = True 
         self.Env.__init__(self.Env.size, dirt_count=5)   # reinitialize env
         self.Agent.actions_log = []
         self.render()
