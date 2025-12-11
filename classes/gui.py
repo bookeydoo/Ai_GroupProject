@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-#import matplotlib.patches as patches
-#from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Button, Slider
 import numpy as np
 import time
@@ -51,7 +49,6 @@ class CleaningGUI:
 
 
     def shutdown(self, event):
-        """When the user presses Start."""
         self.running = False 
 
     def reset_simulation(self, event):

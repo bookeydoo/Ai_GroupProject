@@ -43,11 +43,9 @@ def main():
     # Run 2: Model-Based Agent
     run_simulation(ModelBasedAgent, "Model-Based Agent")
 
-    # Ensure all figures are closed at the end
     plt.close('all')
     print("\nSimulation finished.")
 
-    # input("Press Enter to exit...")
 
 
 if __name__ == "__main__":

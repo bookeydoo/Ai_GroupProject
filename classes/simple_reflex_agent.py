@@ -27,4 +27,3 @@ class SimpleReflexAgent:
         else:
             self.Env.move_agent(action)
 
-        #self.Env.steps += 1
