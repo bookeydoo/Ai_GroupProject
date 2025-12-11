@@ -14,9 +14,9 @@ def run_simulation(agent_type, title):
     agent = agent_type(env)
     gui = CleaningGUI(env, agent,title)
 
-    gui.running = True  # start simulation automatically
+    gui.running = True  
 
-    # Loop until simulation finishes
+    #Main loop
     while gui.running:
         gui.step()
         plt.pause(gui.speed)  
@@ -33,7 +33,6 @@ def run_simulation(agent_type, title):
     print("Clean tiles:", cleaned_tiles)
     print("----------------------------")
 
-    # Close figure for this run
     plt.close(env.fig)
 
 
@@ -47,7 +46,7 @@ def main():
     # Ensure all figures are closed at the end
     plt.close('all')
     print("\nSimulation finished.")
-    # Optional: wait for user to see terminal report
+
     # input("Press Enter to exit...")
 
 

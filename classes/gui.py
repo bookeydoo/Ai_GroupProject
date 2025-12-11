@@ -10,9 +10,9 @@ class CleaningGUI:
     def __init__(self,Env,Agent,title):
         self.Env= Env
         self.Agent=Agent
-        self.running=False    #state of the simulation
+        self.running=False    
         self.Title=title
-        plt.rcParams['toolbar'] = 'none' #disable toolbar
+        plt.rcParams['toolbar'] = 'none' 
 
         #init figures
         self.Env.fig , self.Env.ax=plt.subplots()
