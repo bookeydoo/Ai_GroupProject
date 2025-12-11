@@ -7,11 +7,11 @@ import time
 
 
 class CleaningGUI:
-    def __init__(self,Env,Agent):
+    def __init__(self,Env,Agent,title):
         self.Env= Env
         self.Agent=Agent
         self.running=False    #state of the simulation
-
+        self.Title=title
         plt.rcParams['toolbar'] = 'none' #disable toolbar
 
         #init figures
@@ -37,7 +37,7 @@ class CleaningGUI:
         "Speed",
         valmin=0.05,    # fastest
         valmax=1.0,     # slowest
-        valinit=0.3,    # default
+        valinit=0.2,    # default
         valstep=0.01
         )
         
@@ -102,6 +102,7 @@ class CleaningGUI:
 
         Env.ax.set_title(f"Agent: {Env.agent_pos} | Score: {Env.score} | Steps: {Env.steps}")
 
+        Env.fig.canvas.manager.set_window_title(self.Title)
         Env.fig.canvas.draw()
         Env.fig.canvas.flush_events()
 

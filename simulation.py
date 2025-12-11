@@ -12,14 +12,14 @@ def run_simulation(agent_type, title):
 
     env = VacuumEnvironment(size=5, dirt_count=5)
     agent = agent_type(env)
-    gui = CleaningGUI(env, agent)
+    gui = CleaningGUI(env, agent,title)
 
     gui.running = True  # start simulation automatically
 
     # Loop until simulation finishes
     while gui.running:
         gui.step()
-        plt.pause(0.01)  # allow GUI events to process
+        plt.pause(gui.speed)  
 
     # Count clean tiles
     cleaned_tiles = sum(row.count(0) for row in env.grid.tolist())
