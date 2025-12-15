@@ -20,13 +20,14 @@ class CleaningGUI:
         self.render()
 
         #ADD BUTTONS
-        self.start_ax = plt.axes([0.1, 0.05, 0.25, 0.1])
+
+        self.stop_ax= plt.axes([0.1, 0.05, 0.25, 0.1])
         self.reset_ax = plt.axes([0.6, 0.05, 0.25, 0.1])
 
-        self.start_button = Button(self.start_ax, "Stop")
-        self.reset_button = Button(self.reset_ax, "Reset")
+        self.stop_button= Button(self.stop_ax, "Stop",color="#CF1414", hovercolor="#cc1602")
+        self.reset_button = Button(self.reset_ax, "Reset",color="#2196F3", hovercolor="#42a5f5")
 
-        self.start_button.on_clicked(self.shutdown)
+        self.stop_button.on_clicked(self.shutdown)
         self.reset_button.on_clicked(self.reset_simulation)
     
         # SPEED SLIDER
